@@ -16,7 +16,6 @@ AI Chat Room is text based chat web application that users can converse with AI 
 Tech Stack:
 * Docker
 * Django
-* PostgreSQL
 * REDIS
 * Celery
 * microsoft/DialoGPT-large
