@@ -1,0 +1,56 @@
+<!-- chat/templates/chat/index.html -->
+<!DOCTYPE html>
+<html>
+{% load static %}
+<link rel="shortcut icon" type="image/png" href="{% static 'images/chat_fav.png' %}" />
+<link href="https://bootswatch.com/5/morph/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Chat Rooms</title>
+</head>
+
+<body>
+    <h3>Please select a chat room or search for a specific voice</h3>
+    <input id="room-name-input" type="text" size="100"><br>
+    <input id="room-name-submit" type="button" value="Enter"><br><br>
+
+    <script>
+        document.querySelector('#room-name-input').focus();
+        document.querySelector('#room-name-input').onkeyup = function (e) {
+            if (e.keyCode === 13) {
+                document.querySelector('#room-name-submit').click();
+            }
+        };
+
+        document.querySelector('#room-name-submit').onclick = function (e) {
+            var roomName = document.querySelector('#room-name-input').value;
+            var voiceList = "{{voices}}";
+            if (voiceList.includes(roomName)) {
+                window.location.pathname = '/chat/' + roomName + '/';
+            } else {
+                chatValidation()
+            }
+        };
+
+        function chatValidation() { alert("Chat Room does not exist, please enter valid voice name"); }
+    </script>
+    <br>
+    <h4>RECOMMENDED CHAT ROOMS</h4>
+    <button onclick="location.href='{% url 'room' 'batman'%}'" type="button"
+        class="btn btn-outline-warning">BATMAN</button>
+    <button onclick="location.href='{% url 'room' 'rick_sanchez'%}'" type="button" class="btn btn-outline-warning">RICK
+        SANCHEZ</button>
+    <button onclick="location.href='{% url 'room' 'morty'%}'" type="button"
+        class="btn btn-outline-warning">MORTY</button>
+    <button onclick="location.href='{% url 'room' 'kanye_west_rap'%}'" type="button"
+        class="btn btn-outline-warning">KANYE WEST RAP</button>
+    <br><br><br>
+    <h5>CHAT ROOM LIBRARY</h5>
+    {% for voice in voices %}
+    <a href="{% url 'room' voice%}">{{voice|linebreaks}}</a>
+    {% endfor %}
+
+</body>
+
+</html>

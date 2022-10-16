@@ -1,0 +1,1 @@
+* */6 * * * rm -f /home/$USER/Documents/chat_app/core/chat/static/audio/* >/dev/null 2>&1
